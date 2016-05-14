@@ -79,6 +79,7 @@ namespace HashFunction
         //фільтр
         public static void FilterText(ref string text)
         {
+            text = text.ToUpper();
             StringBuilder sbuild = new StringBuilder();
             sbuild.Append(text);
             for (int i = 0; i < sbuild.Length; i++)

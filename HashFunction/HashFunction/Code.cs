@@ -33,7 +33,7 @@ namespace HashFunction
             }  
             return output;
         }
-        public static List<int> BlockAction(List<int>arr,int numOfBlock,ref int id)
+        private static List<int> BlockAction(List<int>arr,int numOfBlock,ref int id)
         {
             List<int> output = new List<int>();
             int order=arr.Count/numOfBlock+1;

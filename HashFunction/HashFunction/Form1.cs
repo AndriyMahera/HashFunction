@@ -14,6 +14,7 @@ namespace HashFunction
     {
         public const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,;-'0123456789";
         public static double[,] KeyMatrix = { { 12, 0, 7, 4 }, { 17, 14, 21, 18 }, { 10, 24, 0, 13 }, { 3, 17, 8, 24 } };
+        private int inputC=-1;
         public Form1()
         {
             InitializeComponent();
@@ -24,7 +25,32 @@ namespace HashFunction
             string text = richTextBox1.Text;
             Preparation.FilterText(ref text);
             richTextBox1.Text = text;
-            richTextBox2.Text = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(text),4,12)).ToString();
+            if (inputC != -1)
+            {
+                richTextBox2.Text = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(text), 8, inputC)).ToString();
+            }
+            else
+            {
+                MessageBox.Show("Can't be performed");
+            }
+        }
+
+        private void Ok_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length != 0)
+            {
+                int input;
+                if (Int32.TryParse(textBox1.Text, out input))
+                {
+                    if (input >= 0 && input < Alphabet.Length)
+                    {
+                        inputC = input;
+                    }
+                    else { MessageBox.Show("In interval from 0 to 41"); }
+                }
+                else { MessageBox.Show("You inputed not number"); }
+            }
+            else { MessageBox.Show("Field is empty"); }
         }
     }
 }

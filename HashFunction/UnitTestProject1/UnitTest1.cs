@@ -48,6 +48,23 @@ namespace UnitTestProject1
                 }
             }
         }
+        [TestMethod]
+        public void TestAvalancheEffect()
+        {
+            string str = "MAHEROVSKY";
+            FileInfo file = new FileInfo("Avalanche.txt");
+            if (file.Exists == true)
+                file.Delete();
+            using (StreamWriter stream = new StreamWriter("Avalanche.txt", true))
+            {
+                for (int i = 0; i < alph.Length; i++)
+                {
+                    var list = Code.HashFunction(Preparation.FormDigitString(alph[i] + str), 10, 0);
+                    stream.Write(alph[i] + str + "\t");
+                    stream.Write(Preparation.FormStringFromDigit(list) + "\r\n");
+                }
+            }
+        }
         //[TestMethod]
         //public void TestMethod3()
         //{

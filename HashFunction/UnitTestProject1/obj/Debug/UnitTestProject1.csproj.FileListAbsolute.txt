@@ -5,3 +5,10 @@ C:\Users\AndriyMahera\documents\visual studio 2012\Projects\HashFunction\UnitTes
 C:\Users\AndriyMahera\documents\visual studio 2012\Projects\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
 C:\Users\AndriyMahera\documents\visual studio 2012\Projects\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\AndriyMahera\documents\visual studio 2012\Projects\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\bin\Debug\HashFunction.exe
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\bin\Debug\HashFunction.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\UnitTestProject1\obj\Debug\UnitTestProject1.pdb

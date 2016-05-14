@@ -7,3 +7,12 @@ c:\users\andriymahera\documents\visual studio 2012\Projects\HashFunction\HashFun
 c:\users\andriymahera\documents\visual studio 2012\Projects\HashFunction\HashFunction\bin\Debug\HashFunction.pdb
 c:\users\andriymahera\documents\visual studio 2012\Projects\HashFunction\HashFunction\obj\Debug\HashFunction.exe
 c:\users\andriymahera\documents\visual studio 2012\Projects\HashFunction\HashFunction\obj\Debug\HashFunction.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\bin\Debug\HashFunction.exe.config
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.exe
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\bin\Debug\HashFunction.exe
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\bin\Debug\HashFunction.pdb
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.csprojResolveAssemblyReference.cache
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.Form1.resources
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.Properties.Resources.resources
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.csproj.GenerateResource.Cache
