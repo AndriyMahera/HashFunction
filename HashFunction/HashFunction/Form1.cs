@@ -14,6 +14,8 @@ namespace HashFunction
     {
         public const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,;-'0123456789";
         public static double[,] KeyMatrix = { { 12, 0, 7, 4 }, { 17, 14, 21, 18 }, { 10, 24, 0, 13 }, { 3, 17, 8, 24 } };
+        public static double[,] SKeyMatrix = { { 1, 2, 1, 7, 1 }, { 2, 3, 4, 5, 6 }, { 1, 2, 8, 3, 4 }, { 5, 4, 3, 2, 1 }, { 6, 7, 5, 4, 2 } };
+        public static double[,] TKeyMatrix = { {1,2,1,7,1,0},{2,3,4,5,6,1},{1,2,8,3,4,5},{5,4,3,2,1,3},{6,7,5,4,2,4},{0,1,7,1,11,1}};
         private int inputC=-1;
         public Form1()
         {

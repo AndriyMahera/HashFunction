@@ -37,6 +37,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestSingleSequence()
         {
+         
             using (StreamWriter stream = new StreamWriter("Result.txt"))
             {
                 for (int i = 0; i < alph.Length; i++)
@@ -59,8 +60,8 @@ namespace UnitTestProject1
             {
                 for (int i = 0; i < alph.Length; i++)
                 {
-                    var list = Code.HashFunction(Preparation.FormDigitString(alph[i] + str), 10, 0);
-                    stream.Write(alph[i] + str + "\t");
+                    var list = Code.HashFunction(Preparation.FormDigitString(str+alph[i]), 7, 0);
+                    stream.Write(str+alph[i]  + "\t");
                     stream.Write(Preparation.FormStringFromDigit(list) + "\r\n");
                 }
             }
