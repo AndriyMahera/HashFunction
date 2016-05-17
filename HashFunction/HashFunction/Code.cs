@@ -56,6 +56,36 @@ namespace HashFunction
             }  
             return output;
         }
+         public static List<int> HashFunction_withoutPinch(List<int> input,int numOfRounds,int id)
+         {
+             List<int> output = new List<int>();
+             int innerid = id;
+             List<int> middle = new List<int>();
+             List<int> reserve = new List<int>();
+             matrList.Clear();
+             reserve.AddRange(input);
+             matrList.AddRange(new []{matrix,matrix4,matrix3,matrix2,matrix,matrix2,matrix3,matrix4,matrix2});
+ 
+             int amountInBlock = matrList.Select(x=>x.GetLength(0)-1).Sum();
+ 
+             while (reserve.Count != 0)
+             {               
+                 if (reserve.Count < amountInBlock)
+                 {
+                     while (reserve.Count != amountInBlock)
+                         reserve.Add(26);
+                 }
+                 middle = BlockAction(reserve.Take(amountInBlock).ToList(), ref innerid);
+                 for (int i = 0; i < numOfRounds-1; i++)
+                  {
+                      middle = BlockAction(middle, ref innerid);
+                  }                   
+                output.AddRange(middle);
+                innerid = id;
+                reserve.RemoveRange(0, amountInBlock);
+             }
+             return output;
+         }
 
 
         private static List<int> BlockAction(List<int>arr,ref int id)
