@@ -64,7 +64,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestAvalancheEffect()
         {
-            string str = "MAHEROVSKY";
+            string str = "MAHEROVSKYMAHEROVSKYMAHEROVSKYMAHEROVSKY";
             List<int> standard=new List<int>();
             //string 
             FileInfo file = new FileInfo("Avalanche.txt");

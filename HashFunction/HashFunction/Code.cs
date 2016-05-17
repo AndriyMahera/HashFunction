@@ -39,12 +39,25 @@ namespace HashFunction
                 {
                     middle = BlockAction(middle, ref innerid);
                 }                   
-                output.AddRange(middle);
+                
+                
+                if (output.Count == 0)
+                {
+                    output.AddRange(middle);
+                }
+                else
+                {
+                    List<int> result = Miyaguchi_Preneel(output,middle,reserve.Take(amountInBlock).ToList());
+                    output.Clear();
+                    output.AddRange(result);
+                }
                 innerid = id;
-                reserve.RemoveRange(0, amountInBlock);               
+                reserve.RemoveRange(0, amountInBlock);
             }  
             return output;
         }
+
+
         private static List<int> BlockAction(List<int>arr,ref int id)
         {
             List<int> output = new List<int>();
@@ -61,5 +74,13 @@ namespace HashFunction
             }
             return output;
         }
+        private static List<int> Miyaguchi_Preneel(List<int> H_prev,List<int> H_curr,List<int> m)
+        {
+            if (H_prev.Count != H_curr.Count && H_curr.Count!=m.Count)
+                throw new ArgumentException("Different sizes!");
+            List<int> middle = m.Select((x, i) => H_curr[i]^x).ToList();
+            return middle.Select((x, i) => x ^ H_prev[i]).ToList();
+        }
+        
     }
 }
