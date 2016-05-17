@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace HashFunction
 {
@@ -12,6 +13,7 @@ namespace HashFunction
         private static double[,] matrix = Form1.KeyMatrix;
         private static double[,] matrix2 = Form1.SKeyMatrix;
         private static double[,] matrix3 = Form1.TKeyMatrix;
+        private static double[,] matrix4 = Form1.FKeyMatrix;
         private static List<double[,]> matrList = new List<double[,]>();
         public static List<int> HashFunction(List<int> input,int numOfRounds,int id)
         {
@@ -21,13 +23,9 @@ namespace HashFunction
             List<int> reserve = new List<int>();
             matrList.Clear();
             reserve.AddRange(input);
-            matrList.AddRange(new []{matrix3,matrix2,matrix,matrix2,matrix3});
+            matrList.AddRange(new []{matrix,matrix4,matrix3,matrix2,matrix,matrix2,matrix3,matrix4,matrix2});
 
-            int amountInBlock = matrList.Select(x=>x.GetLength(0)).Sum();
-            //for (int i = 0; i < matrList.Count; i++)
-            //{
-            //    amountInBlock += (matrList[i].GetLength(0) - 1);
-            //}
+            int amountInBlock = matrList.Select(x=>x.GetLength(0)-1).Sum();
 
             while (reserve.Count != 0)
             {               

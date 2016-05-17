@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
 
 namespace HashFunction
 {
@@ -15,11 +17,19 @@ namespace HashFunction
         public const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,;-'0123456789";
         public static double[,] KeyMatrix = { { 12, 0, 7, 4 }, { 17, 14, 21, 18 }, { 10, 24, 0, 13 }, { 3, 17, 8, 24 } };
         public static double[,] SKeyMatrix = { { 1, 2, 1, 7, 1 }, { 2, 3, 4, 5, 6 }, { 1, 2, 8, 3, 4 }, { 5, 4, 3, 2, 1 }, { 6, 7, 5, 4, 2 } };
-        public static double[,] TKeyMatrix = { {1,2,1,7,1,0},{2,3,4,5,6,1},{1,2,8,3,4,5},{5,4,3,2,1,3},{6,7,5,4,2,4},{0,1,7,1,11,1}};
+        public static double[,] TKeyMatrix = { { 1, 2, 1, 7, 1, 0 }, { 2, 3, 4, 5, 6, 1 }, { 1, 2, 8, 3, 4, 5 }, { 5, 4, 3, 2, 1, 3 }, { 6, 7, 5, 4, 2, 4 }, { 0, 1, 7, 1, 11, 1 } };
+        public static double[,] FKeyMatrix = { { 13, 14, 0 }, { 18, 8, 17 }, { 12, 11, 21 } };
+        string testOfRandomness = "";
         private int inputC=-1;
         public Form1()
         {
             InitializeComponent();
+            testOfRandomness = File.ReadAllText("randomness.txt");
+            Preparation.FilterText(ref testOfRandomness);
+            string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 8, inputC)).ToString();
+            var dict = Preparation.UniquesDict(result,1);
+            Preparation.MakeChart(chart1,dict);
+            double deviation = Preparation.FindDeviation(dict, result.Length);
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.IO;
 
 namespace UnitTestProject1
 {
+
     [TestClass]
     public class UnitTest1
     {
@@ -66,6 +67,59 @@ namespace UnitTestProject1
                 }
             }
         }
+        [TestMethod]
+        public void TestFirstProperty()
+        {
+            string h = "VA5YQF,5OCUAEC4MN4'5O";
+            string actual;
+            List<int> list = new List<int>();
+            bool isEqual = false;
+            for (int i = 0; i < 10000000; i++)
+            {
+                list.Clear();
+                for (int j = 0; j < 31; j++)
+                {
+                    list.Add(rnd.Next(0,alph.Length));
+                }
+                actual = Preparation.FormStringFromDigit(Code.HashFunction(list,7,0)).ToString();
+                if (h.Equals(actual))
+                {
+                    isEqual = true;
+                    break;
+                }
+                
+            }
+            Assert.AreEqual(isEqual, false, "Found equal value!You loose.");
+
+        }
+
+
+        [TestMethod]
+        public void TestSecondProperty()
+        {
+            string h = "VA5YQF,5OCUAEC4MN4'5O";
+            string expected = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(h),7,0)).ToString();
+            string actual;
+            List<int> list = new List<int>();
+            bool isEqual = false;
+            for (int i = 0; i < 10000000; i++)
+            {
+                list.Clear();
+                for (int j = 0; j < 21; j++)
+                {
+                    list.Add(rnd.Next(0, alph.Length));
+                }
+                actual = Preparation.FormStringFromDigit(Code.HashFunction(list, 7, 0)).ToString();
+                if (expected.Equals(actual))
+                {
+                    isEqual = true;
+                    break;
+                }
+
+            }
+            Assert.AreEqual(isEqual, false, "Found equal value!You loose.");
+        }
+
         //[TestMethod]
         //public void TestMethod3()
         //{

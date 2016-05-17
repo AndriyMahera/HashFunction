@@ -95,5 +95,20 @@ namespace HashFunction
             }
             text = sbuild.ToString();
         }
+        //середнє інтегральне відхилення
+        public static double FindDeviation(Dictionary<string, int> dict, int count)
+        {
+            double dev = 0;
+            double Max = double.MinValue;
+            List<double> frequency = new List<double>();
+            foreach (KeyValuePair<string, int> kpv in dict)
+            {
+                frequency.Add(kpv.Value / (double)count);
+            }
+            Max = frequency.Max();
+            double Sum = frequency.Select(x => (Max - x) / Max).Sum();
+            dev = Sum * 100 / alphabet.Length;
+            return dev;
+        }
     }
 }
