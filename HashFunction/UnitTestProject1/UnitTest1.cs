@@ -51,9 +51,22 @@ namespace UnitTestProject1
             }
         }
         [TestMethod]
+        public void TestBiteComparer()
+        {
+            List<int> lint1 = new List<int>(), lint2 = new List<int>();
+            lint1.AddRange(new []{1,1,0});
+            lint2.AddRange(new []{1,1,1});
+
+            int diff = Preparation.FindBiteDiff(lint1,lint2);
+
+            Assert.AreEqual(1,diff,"Something wrong!");
+        }
+        [TestMethod]
         public void TestAvalancheEffect()
         {
             string str = "MAHEROVSKY";
+            List<int> standard=new List<int>();
+            //string 
             FileInfo file = new FileInfo("Avalanche.txt");
             if (file.Exists == true)
                 file.Delete();
@@ -61,9 +74,20 @@ namespace UnitTestProject1
             {
                 for (int i = 0; i < alph.Length; i++)
                 {
+                    int biteDiff;
                     var list = Code.HashFunction(Preparation.FormDigitString(str+alph[i]), 7, 0);
                     stream.Write(str+alph[i]  + "\t");
-                    stream.Write(Preparation.FormStringFromDigit(list) + "\r\n");
+                    if (i == 0)
+                    {
+                        standard.AddRange(list);                        
+                        biteDiff = 0;
+                    }
+                    else
+                    {
+                        biteDiff = Preparation.FindBiteDiff(standard,list);
+                    }
+                    stream.Write(Preparation.FormStringFromDigit(list) + "\t");
+                    stream.Write(biteDiff+"  із 192\r\n");
                 }
             }
         }

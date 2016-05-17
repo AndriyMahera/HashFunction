@@ -110,5 +110,27 @@ namespace HashFunction
             dev = Sum * 100 / alphabet.Length;
             return dev;
         }
+        public static int FindBiteDiff(List<int> standard, List<int> input)
+        {
+            if (standard.Count != input.Count)
+                throw new ArgumentException("Different lengths.Impossible to perform.");
+            string standStr = FormBiteString(standard);
+            string inputStr = FormBiteString(input);
+            return standStr.Where((x, i) => x != inputStr[i]).Count();
+        }
+        private static string FormBiteString(List<int> input)
+        {
+            string result = "";
+            foreach (int el in input)
+            {
+                string middle = Convert.ToString(el,2);
+                while (middle.Length != 6)
+                {
+                    middle = "0" + middle;
+                }
+                result += middle;
+            }
+            return result;
+        }
     }
 }
