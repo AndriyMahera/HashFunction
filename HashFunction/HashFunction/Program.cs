@@ -11,12 +11,16 @@ namespace HashFunction
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// 
+        static public Autorization startForm;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            startForm = new Autorization();
+            //Application.Run(new Form1());
+            Application.Run(startForm);
         }
     }
 }

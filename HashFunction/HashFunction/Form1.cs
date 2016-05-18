@@ -66,5 +66,17 @@ namespace HashFunction
             }
             else { MessageBox.Show("Field is empty"); }
         }
+
+        private void CreateAccount_button_Click(object sender, EventArgs e)
+        {
+            var craForm = new CreateAccountForm();
+            craForm.Owner = this;
+            craForm.ShowDialog();
+        }
+
+        private void Log_in_button_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

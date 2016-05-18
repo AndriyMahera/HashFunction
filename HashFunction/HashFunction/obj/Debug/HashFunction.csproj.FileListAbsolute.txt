@@ -16,3 +16,5 @@ C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction
 C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.Form1.resources
 C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.Properties.Resources.resources
 C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.csproj.GenerateResource.Cache
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.CreateAccountForm.resources
+C:\Users\AndriyMahera\Documents\Visual Studio 2012\Git\HashFunction\HashFunction\HashFunction\obj\Debug\HashFunction.Autorization.resources
