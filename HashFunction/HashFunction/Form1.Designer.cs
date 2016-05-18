@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -38,6 +38,11 @@
             this.Ok = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CreateAccount_button = new System.Windows.Forms.Button();
+            this.signedTextBox = new System.Windows.Forms.RichTextBox();
+            this.decryptedHashTextBox = new System.Windows.Forms.RichTextBox();
+            this.signButton = new System.Windows.Forms.Button();
+            this.hashTextBox = new System.Windows.Forms.RichTextBox();
+            this.chechHash = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,19 +91,19 @@
             // 
             // chart1
             // 
-            chartArea2.Area3DStyle.Enable3D = true;
-            chartArea2.BackColor = System.Drawing.Color.Yellow;
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.BackColor = System.Drawing.Color.Yellow;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 190);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Color = System.Drawing.Color.Red;
-            series2.Legend = "Legend1";
-            series2.Name = "F";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.Red;
+            series1.Legend = "Legend1";
+            series1.Name = "F";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(880, 318);
             this.chart1.TabIndex = 5;
             this.chart1.Text = "chart1";
@@ -113,11 +118,60 @@
             this.CreateAccount_button.UseVisualStyleBackColor = true;
             this.CreateAccount_button.Click += new System.EventHandler(this.CreateAccount_button_Click);
             // 
+            // signedTextBox
+            // 
+            this.signedTextBox.Location = new System.Drawing.Point(587, 41);
+            this.signedTextBox.Name = "signedTextBox";
+            this.signedTextBox.Size = new System.Drawing.Size(234, 23);
+            this.signedTextBox.TabIndex = 7;
+            this.signedTextBox.Text = "";
+            // 
+            // decryptedHashTextBox
+            // 
+            this.decryptedHashTextBox.Location = new System.Drawing.Point(587, 70);
+            this.decryptedHashTextBox.Name = "decryptedHashTextBox";
+            this.decryptedHashTextBox.Size = new System.Drawing.Size(234, 22);
+            this.decryptedHashTextBox.TabIndex = 8;
+            this.decryptedHashTextBox.Text = "";
+            // 
+            // signButton
+            // 
+            this.signButton.Location = new System.Drawing.Point(827, 12);
+            this.signButton.Name = "signButton";
+            this.signButton.Size = new System.Drawing.Size(89, 23);
+            this.signButton.TabIndex = 9;
+            this.signButton.Text = "Sign";
+            this.signButton.UseVisualStyleBackColor = true;
+            this.signButton.Click += new System.EventHandler(this.signButton_Click);
+            // 
+            // hashTextBox
+            // 
+            this.hashTextBox.Location = new System.Drawing.Point(587, 12);
+            this.hashTextBox.Name = "hashTextBox";
+            this.hashTextBox.Size = new System.Drawing.Size(234, 23);
+            this.hashTextBox.TabIndex = 10;
+            this.hashTextBox.Text = "";
+            // 
+            // chechHash
+            // 
+            this.chechHash.Location = new System.Drawing.Point(827, 41);
+            this.chechHash.Name = "chechHash";
+            this.chechHash.Size = new System.Drawing.Size(89, 23);
+            this.chechHash.TabIndex = 11;
+            this.chechHash.Text = "Check";
+            this.chechHash.UseVisualStyleBackColor = true;
+            this.chechHash.Click += new System.EventHandler(this.chechHash_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 520);
+            this.ClientSize = new System.Drawing.Size(923, 520);
+            this.Controls.Add(this.chechHash);
+            this.Controls.Add(this.hashTextBox);
+            this.Controls.Add(this.signButton);
+            this.Controls.Add(this.decryptedHashTextBox);
+            this.Controls.Add(this.signedTextBox);
             this.Controls.Add(this.CreateAccount_button);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.Ok);
@@ -142,6 +196,11 @@
         private System.Windows.Forms.Button Ok;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button CreateAccount_button;
+        private System.Windows.Forms.RichTextBox signedTextBox;
+        private System.Windows.Forms.RichTextBox decryptedHashTextBox;
+        private System.Windows.Forms.Button signButton;
+        private System.Windows.Forms.RichTextBox hashTextBox;
+        private System.Windows.Forms.Button chechHash;
     }
 }
 

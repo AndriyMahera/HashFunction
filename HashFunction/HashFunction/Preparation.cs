@@ -12,6 +12,9 @@ namespace HashFunction
     public class Preparation
     {
         public const string alphabet = Form1.Alphabet;
+        public const int SYMBOLS_FOR_LEN = 6;
+        public const int BASE = 5;
+        private static Random rnd = new Random();
         //count amount of symbols(bi,-threegrams)
         public static Dictionary<string, int> UniquesDict(string str, int amount)
         {
@@ -131,6 +134,47 @@ namespace HashFunction
                 result += middle;
             }
             return result;
+        }
+        public static double[,] FormSuitableKey(string str)
+        {
+            double order=Math.Sqrt(str.Length);
+            int iorder=(int)order;
+            if (order!= (int)order)
+                throw new ArgumentException("It isn't key,fool!");
+            double[,] output=new double[iorder,iorder];
+            string []str2=new string[iorder];
+            for(int i=0;i<iorder;i++)
+                str2[i]=string.Concat(str.Skip(iorder*i).Take(iorder));
+            for(int i=0;i<output.GetLength(0);i++)
+                for(int j=0;j<output.GetLength(1);j++)
+                    output[i,j]=alphabet.IndexOf(str2[i][j]);
+            return output;
+        }
+        //сформувати рядок,що буде позначати кількість елементів в списку рандомів
+        public static int[] CalcRandomList(List<int> rand)
+        {
+            int[] result = new int[SYMBOLS_FOR_LEN];
+            string str = rand.Count.ToString();
+            if (str.Length > SYMBOLS_FOR_LEN)
+                throw new ArgumentException("Your random list is too long");
+            int[] part2 = str.Select(x => (int)Char.GetNumericValue(x)).ToArray();
+            int[] part1 = Enumerable.Range(0, SYMBOLS_FOR_LEN - str.Length).Select(x => 0).ToArray();
+            return part1.Concat(part2).ToArray();
+        }
+        //знайти підходяще хєрове число
+        public static int FindMaskNumber()
+        {
+            int res = rnd.Next(0, alphabet.Length - BASE);
+            return res % BASE == 0 ? res : FindMaskNumber();
+        }
+        //спотворити рандомний список
+        public static List<int> FormMaskedRandomList(List<int> rand)
+        {
+            return rand.Select(x => x + FindMaskNumber()).ToList();
+        }
+        public static List<int> FormUnmaskedRandomList(List<int> masked)
+        {
+            return masked.Select(x => x % BASE).ToList();
         }
     }
 }
