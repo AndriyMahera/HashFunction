@@ -34,7 +34,7 @@ namespace HashFunction
             InitializeComponent();
             testOfRandomness = File.ReadAllText("randomness.txt");
             Preparation.FilterText(ref testOfRandomness);
-            string result = Preparation.FormStringFromDigit(Code.HashFunction_withoutPinch(Preparation.FormDigitString(testOfRandomness), 7, 0)).ToString();
+            string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7, 0,false)).ToString();
             
             var dict = Preparation.UniquesDict(result,1);
             Preparation.MakeChart(chart1,dict);
@@ -48,7 +48,7 @@ namespace HashFunction
             richTextBox1.Text = text;
             if (inputC != -1)
             {
-                richTextBox2.Text = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(text), 7, inputC)).ToString();
+                richTextBox2.Text = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(text), 7, inputC,true)).ToString();
             }
             else
             {
@@ -89,7 +89,8 @@ namespace HashFunction
             {
                 symbolLen = SYMBOLS_FOR_LEN;
                 testOfRandomness = File.ReadAllText("randomness.txt");
-                string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7, 0)).ToString();
+                Preparation.FilterText(ref testOfRandomness);
+                string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7, 0,true)).ToString();
                 digit = Preparation.FormDigitString(result);
             }
             else
@@ -166,7 +167,7 @@ namespace HashFunction
                 decryptedHashTextBox.Text = Preparation.FormStringFromDigit(decrypted).ToString();
                 string testOfRandomness2 = File.ReadAllText("randomness.txt");
                 Preparation.FilterText(ref testOfRandomness2);
-                string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness2), 7, 0)).ToString();
+                string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness2), 7, 0,true)).ToString();
                 computedHashTextBox.Text = result;
 
                 if (decryptedHashTextBox.Text.Equals(result))

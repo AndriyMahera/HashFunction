@@ -36,9 +36,9 @@ namespace HashFunction
                 string salt = db.SALT;
                 string hashValue = db.HASH;
                 string randomSeq = string.Concat(Enumerable.Range(0,RAND_LENGTH).Select(x=>ALPHABET[rnd.Next(0,ALPHABET.Length)]));
-                string computedHashValue = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(passwordTextBox.Text+salt),7,0)).ToString();
-                string actual = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(randomSeq+computedHashValue),7,0)).ToString();
-                string expected = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(randomSeq + hashValue), 7, 0)).ToString();
+                string computedHashValue = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(passwordTextBox.Text+salt),7,0,true)).ToString();
+                string actual = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(randomSeq+computedHashValue),7,0,true)).ToString();
+                string expected = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(randomSeq + hashValue), 7, 0,true)).ToString();
                 if (actual.Equals(expected))
                 {
                     mainForm = new Form1();

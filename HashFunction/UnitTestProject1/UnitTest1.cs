@@ -45,7 +45,7 @@ namespace UnitTestProject1
                 {
 
                     stream.Write(alph[i] + "\t- \t");
-                    stream.Write(HashFunction.Preparation.FormStringFromDigit(HashFunction.Code.HashFunction(new[] { i }.ToList(), 4, 12)));
+                    stream.Write(HashFunction.Preparation.FormStringFromDigit(HashFunction.Code.HashFunction(new[] { i }.ToList(), 4, 12,true)));
                     stream.WriteLine();
                 }
             }
@@ -75,7 +75,7 @@ namespace UnitTestProject1
                 for (int i = 0; i < alph.Length; i++)
                 {
                     int biteDiff;
-                    var list = Code.HashFunction(Preparation.FormDigitString(str+alph[i]), 7, 0);
+                    var list = Code.HashFunction(Preparation.FormDigitString(str+alph[i]), 7, 0,true);
                     stream.Write(str+alph[i]  + "\t");
                     if (i == 0)
                     {
@@ -105,7 +105,7 @@ namespace UnitTestProject1
                 {
                     list.Add(rnd.Next(0,alph.Length));
                 }
-                actual = Preparation.FormStringFromDigit(Code.HashFunction(list,7,0)).ToString();
+                actual = Preparation.FormStringFromDigit(Code.HashFunction(list,7,0,true)).ToString();
                 if (h.Equals(actual))
                 {
                     isEqual = true;
@@ -122,7 +122,7 @@ namespace UnitTestProject1
         public void TestSecondProperty()
         {
             string h = "VA5YQF,5OCUAEC4MN4'5O";
-            string expected = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(h),7,0)).ToString();
+            string expected = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(h),7,0,true)).ToString();
             string actual;
             List<int> list = new List<int>();
             bool isEqual = false;
@@ -133,7 +133,7 @@ namespace UnitTestProject1
                 {
                     list.Add(rnd.Next(0, alph.Length));
                 }
-                actual = Preparation.FormStringFromDigit(Code.HashFunction(list, 7, 0)).ToString();
+                actual = Preparation.FormStringFromDigit(Code.HashFunction(list, 7, 0,true)).ToString();
                 if (expected.Equals(actual))
                 {
                     isEqual = true;

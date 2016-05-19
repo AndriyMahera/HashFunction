@@ -110,7 +110,7 @@ namespace HashFunction
         private void AddNewAccount(string login,string password)
         {
             string newSalt = String.Concat(Enumerable.Range(0, SALT_LENGTH).Select(x => ALPHABET[rnd.Next(0, ALPHABET.Length)]));
-            string newHash = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(password + newSalt), 7, 0)).ToString();
+            string newHash = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(password + newSalt), 7, 0,true)).ToString();
             dbClass.Add(new DataBase(FindSuitableId(dbClass), login, newHash, newSalt));
             dbClass = dbClass.OrderBy(x => x.ID).ToList();
             using (StreamWriter stream = new StreamWriter(dataBase, false))
