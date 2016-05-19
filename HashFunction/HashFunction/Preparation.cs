@@ -69,9 +69,9 @@ namespace HashFunction
             }
         }
         //замалювати пробіли рандомні
-        public static void ColorText(RichTextBox rtb, List<int> random, int order, Color color)
+        public static void ColorText(RichTextBox rtb, List<int> random, int order, Color color, int shift)
         {
-            int sum = order;
+            int sum = order + shift;
             foreach (int el in random)
             {
                 rtb.Select(sum, el);
