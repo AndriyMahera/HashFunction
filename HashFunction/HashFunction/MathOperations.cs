@@ -162,4 +162,4 @@ namespace HashFunction
             return newVector;
         }
     }
-    }
+}

@@ -21,9 +21,14 @@ namespace HashFunction
         public static double[,] FKeyMatrix = { { 13, 14, 0 }, { 18, 8, 17 }, { 12, 11, 21 } };
 
         private const string openKey = "L)?O7.}H3,]YS Z=P>${%+<|)MJ'EX[B|MD?]{H<Z";
-        public static double[,] InverseMatrix, SInverseMatrix;
-        string testOfRandomness = "";
+        private static double[,] InverseMatrix, SInverseMatrix;
+        private List<int> encrypted = new List<int>(), encryptedF = new List<int>(), encrypted2 = new List<int>(), encrypted2F = new List<int>();
+        private List<int> decrypted = new List<int>(),decrypted2=new List<int>(), digit = new List<int>();
+        private string testOfRandomness = "";
+        private const int SYMBOLS_FOR_LEN = 1,SYMBOLS_FOR_LEN2=6;
         private int inputC=-1;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -76,50 +81,83 @@ namespace HashFunction
             craForm.ShowDialog();
         }
 
-        private void Log_in_button_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void signButton_Click(object sender, EventArgs e)
         {
+            encryptedF.Clear(); encrypted2F.Clear();
             string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7, 0)).ToString();
             InverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Take(16)));
-            SInverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Skip(16)));
+            SInverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Skip(16)));           
+            List<int> random = new List<int>(), random2 = new List<int>();
 
+            digit = Preparation.FormDigitString(result);
+            //1-й раунд шифрування
             encrypted = Code.HillPlusRandomEncrypt(digit, KeyMatrix, Alphabet.Length, random);
-            int[] count = Preparation.CalcRandomList(random);
+            int[] count = Preparation.CalcRandomList(random,SYMBOLS_FOR_LEN);
             List<int> maskedR = Preparation.FormMaskedRandomList(random);
             encryptedF.AddRange(count); encryptedF.AddRange(maskedR); encryptedF.AddRange(encrypted);
-            richTextBox2.Text = Preparation.FormStringFromDigit(encryptedF).ToString();
-            richTextBox3.Text = Preparation.FormStringFromDigit(encryptedF).ToString();
+            //2-й раунд шифрування
             encrypted2 = Code.HillPlusRandomEncrypt(encryptedF, SKeyMatrix, Alphabet.Length, random2);
-            int[] count2 = Preparation.CalcRandomList(random2);
+            int[] count2 = Preparation.CalcRandomList(random2,SYMBOLS_FOR_LEN);
             List<int> maskedR2 = Preparation.FormMaskedRandomList(random2);
             encrypted2F.AddRange(count2); encrypted2F.AddRange(maskedR2); encrypted2F.AddRange(encrypted2);
-
-            richTextBox4.Text = Preparation.FormStringFromDigit(encrypted2F).ToString();
-
-
+            signedTextBox.Text = Preparation.FormStringFromDigit(encrypted2F).ToString();
             hashTextBox.Text = result;
+
+            checkHash.Enabled = true;
         }
 
-        private void chechHash_Click(object sender, EventArgs e)
+        private void checkHash_Click(object sender, EventArgs e)
         {
+            MyEvents me = e as MyEvents;
+            if (me == null)
+            {
+
+            }
+            else
+            {
+
+            }
+            
+            //1-й раунд розшивровки
             int count2 = Convert.ToInt32(String.Concat(encrypted2F.Take(Preparation.SYMBOLS_FOR_LEN)));
             List<int> random2 = Preparation.FormUnmaskedRandomList(encrypted2F.Skip(Preparation.SYMBOLS_FOR_LEN).Take(count2).ToList());
             encrypted2 = encrypted2F.Skip(Preparation.SYMBOLS_FOR_LEN + random2.Count).ToList();
-
             decrypted2 = Code.HillPlusRandomDecrypt(encrypted2, SInverseMatrix, Alphabet.Length, random2);
-
+            //2-й раунд розшифровки
             int count = Convert.ToInt32(String.Concat(decrypted2.Take(Preparation.SYMBOLS_FOR_LEN)));
             List<int> random = Preparation.FormUnmaskedRandomList(decrypted2.Skip(Preparation.SYMBOLS_FOR_LEN).Take(count).ToList());
-            decrypted = decrypted2.Skip(Preparation.SYMBOLS_FOR_LEN + random.Count).ToList();
+            encrypted = decrypted2.Skip(Preparation.SYMBOLS_FOR_LEN + random.Count).ToList();
+            decrypted = Code.HillPlusRandomDecrypt(encrypted, InverseMatrix, Alphabet.Length, random);
+            decrypted = decrypted.Take(32).ToList();
+            decryptedHashTextBox.Text = Preparation.FormStringFromDigit(decrypted).ToString();
 
-            decrypted = Code.HillPlusRandomDecrypt(decrypted, InverseMatrix, Alphabet.Length, random);
+            string testOfRandomness2 = File.ReadAllText("randomness.txt");
+            Preparation.FilterText(ref testOfRandomness2);
+            string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness2), 7, 0)).ToString();
+            computedHashTextBox.Text = result;
 
+            if (decryptedHashTextBox.Text.Equals(result))
+                MessageBox.Show("Document is original!");
+            else
+                MessageBox.Show("Document is fake!");
+        }
+        private class MyEvents : EventArgs
+        {
+            public int len=1;
+            public MyEvents(int a)
+            {
+                this.len = a;
+            }
+        }
 
-            richTextBox5.Text = Preparation.FormStringFromDigit(decrypted).ToString();
+        private void Encrypt_Click(object sender, EventArgs e)
+        {
+            this.signButton_Click(this,new MyEvents(100));
+        }
+
+        private void Decrypt_Click(object sender, EventArgs e)
+        {
+            this.checkHash_Click(this,new MyEvents(100));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace HashFunction
     public class Preparation
     {
         public const string alphabet = Form1.Alphabet;
-        public const int SYMBOLS_FOR_LEN = 6;
+        public const int SYMBOLS_FOR_LEN = 1;
         public const int BASE = 5;
         private static Random rnd = new Random();
         //count amount of symbols(bi,-threegrams)
@@ -151,14 +151,14 @@ namespace HashFunction
             return output;
         }
         //сформувати рядок,що буде позначати кількість елементів в списку рандомів
-        public static int[] CalcRandomList(List<int> rand)
+        public static int[] CalcRandomList(List<int> rand,int symbolsForLen)
         {
-            int[] result = new int[SYMBOLS_FOR_LEN];
+            int[] result = new int[symbolsForLen];
             string str = rand.Count.ToString();
-            if (str.Length > SYMBOLS_FOR_LEN)
+            if (str.Length > symbolsForLen)
                 throw new ArgumentException("Your random list is too long");
             int[] part2 = str.Select(x => (int)Char.GetNumericValue(x)).ToArray();
-            int[] part1 = Enumerable.Range(0, SYMBOLS_FOR_LEN - str.Length).Select(x => 0).ToArray();
+            int[] part1 = Enumerable.Range(0, symbolsForLen - str.Length).Select(x => 0).ToArray();
             return part1.Concat(part2).ToArray();
         }
         //знайти підходяще хєрове число

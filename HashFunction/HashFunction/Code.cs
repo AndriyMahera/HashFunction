@@ -111,8 +111,7 @@ namespace HashFunction
                 throw new ArgumentException("Different sizes!");
             List<int> middle = m.Select((x, i) => H_curr[i]^x).ToList();
             return middle.Select((x, i) => x ^ H_prev[i]).ToList();
-        }
-        
+        }       
         public static List<int> HillPlusRandomEncrypt(List<int> list, double[,] matrix, int alphabet, List<int> random)
         {
             random.Clear();
