@@ -29,7 +29,7 @@ namespace UnitTestProject1
                 if (lissssst.All(x => !x.SequenceEqual(list)))
                 {
                     lissssst.Add(list);
-                    megalist.Add(HashFunction.Code.HashFunction(list, 4, 0));
+                    megalist.Add(HashFunction.Code.HashFunction(list, 4, 0,true));
                 }
             }
             isUnique = megalist.Count == lissssst.Count;
@@ -142,6 +142,26 @@ namespace UnitTestProject1
 
             }
             Assert.AreEqual(isEqual, false, "Found equal value!You loose.");
+        }
+        [TestMethod]
+        public void CheckVigenere()
+        {
+            List<int> list = new List<int>();
+            list.AddRange(new []{1,5,4,3,1,7,56,43,23,32});
+            var h = Code.Vigenere(list,"MAHERA",true);
+            var hAfter = Code.Vigenere(h,"MAHERA",false);
+            bool ui = list.SequenceEqual(hAfter);
+            Assert.AreEqual(h,hAfter," ");
+        }
+        [TestMethod]
+        public void CheckFeistel()
+        {
+            List<int> list = new List<int>();
+            list.AddRange(new[] { 1, 5, 4, 3, 1, 7, 56, 43, 23, 32 });
+            var h = Code.FeistelEncrypt_Decrypt(list, true);
+            var hAfter = Code.FeistelEncrypt_Decrypt(h, false);
+            bool ui = list.SequenceEqual(hAfter);
+            Assert.AreEqual(h, hAfter, " ");
         }
 
         //[TestMethod]

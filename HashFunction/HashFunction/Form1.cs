@@ -35,7 +35,12 @@ namespace HashFunction
             testOfRandomness = File.ReadAllText("randomness.txt");
             Preparation.FilterText(ref testOfRandomness);
             string result = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7, 0,false)).ToString();
-            
+
+            string resultVigenere = Preparation.FormStringFromDigit(Code.Vigenere(Preparation.FormDigitString(testOfRandomness),"mahera",true)).ToString();
+            string resultFeistel = Preparation.FormStringFromDigit(Code.FeistelEncrypt_Decrypt(Preparation.FormDigitString(testOfRandomness), true)).ToString();
+            string resultHill = Preparation.FormStringFromDigit(Code.Hill_Encrypt_Decrypt(Preparation.FormDigitString(testOfRandomness), SKeyMatrix,Alphabet.Length)).ToString();
+            string resultHash = Preparation.FormStringFromDigit(Code.HashFunction(Preparation.FormDigitString(testOfRandomness), 7,0,false)).ToString();
+
             var dict = Preparation.UniquesDict(result,1);
             Preparation.MakeChart(chart1,dict);
             double deviation = Preparation.FindDeviation(dict, result.Length);
@@ -102,6 +107,9 @@ namespace HashFunction
                 digit = Preparation.FormDigitString(testOfRandomness);
             }
 
+            digit = Preparation.FormDigitString("MAHEROVSKYANDRIY");
+            symbolLen = SYMBOLS_FOR_LEN;
+
             encryptedF.Clear(); encrypted2F.Clear();            
             InverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Take(16)));
             SInverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Skip(16)));           
@@ -110,6 +118,7 @@ namespace HashFunction
             
             //1-й раунд шифрування
             encrypted = Code.HillPlusRandomEncrypt(digit, KeyMatrix, Alphabet.Length, random);
+            var st = string.Concat(encrypted.Select(x=>x.ToString()));
             int[] count = Preparation.CalcRandomList(random, symbolLen);
             List<int> maskedR = Preparation.FormMaskedRandomList(random);
             encryptedF.AddRange(count); encryptedF.AddRange(maskedR); encryptedF.AddRange(encrypted);
@@ -118,6 +127,7 @@ namespace HashFunction
             int[] count2 = Preparation.CalcRandomList(random2, symbolLen);
             List<int> maskedR2 = Preparation.FormMaskedRandomList(random2);
             encrypted2F.AddRange(count2); encrypted2F.AddRange(maskedR2); encrypted2F.AddRange(encrypted2);
+
 
 
             if (me == null)
