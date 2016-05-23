@@ -107,8 +107,8 @@ namespace HashFunction
                 digit = Preparation.FormDigitString(testOfRandomness);
             }
 
-            digit = Preparation.FormDigitString("MAHEROVSKYANDRIY");
-            symbolLen = SYMBOLS_FOR_LEN;
+            //digit = Preparation.FormDigitString("MAHEROVSKYANDRIY");
+            //symbolLen = SYMBOLS_FOR_LEN;
 
             encryptedF.Clear(); encrypted2F.Clear();            
             InverseMatrix = Preparation.FormSuitableKey(string.Concat(openKey.Take(16)));
@@ -118,15 +118,24 @@ namespace HashFunction
             
             //1-й раунд шифрування
             encrypted = Code.HillPlusRandomEncrypt(digit, KeyMatrix, Alphabet.Length, random);
-            var st = string.Concat(encrypted.Select(x=>x.ToString()));
+            //var st = string.Join(" ",encrypted.Select(x=>x.ToString()));
             int[] count = Preparation.CalcRandomList(random, symbolLen);
+           // st = string.Join(" ", count.Select(x => x.ToString()));
+            //st = string.Join(" ", random.Select(x => x.ToString()));
             List<int> maskedR = Preparation.FormMaskedRandomList(random);
+            //st = string.Join(" ", maskedR.Select(x => x.ToString()));
             encryptedF.AddRange(count); encryptedF.AddRange(maskedR); encryptedF.AddRange(encrypted);
+            //st = string.Join(" ", encryptedF.Select(x => x.ToString()));
             //2-й раунд шифрування
             encrypted2 = Code.HillPlusRandomEncrypt(encryptedF, SKeyMatrix, Alphabet.Length, random2);
+            //st = string.Join(" ", encrypted2.Select(x => x.ToString()));
             int[] count2 = Preparation.CalcRandomList(random2, symbolLen);
+            //st = string.Join(" ", count2.Select(x => x.ToString()));
+            //st = string.Join(" ", random2.Select(x => x.ToString()));
             List<int> maskedR2 = Preparation.FormMaskedRandomList(random2);
+            //st = string.Join(" ", maskedR2.Select(x => x.ToString()));          
             encrypted2F.AddRange(count2); encrypted2F.AddRange(maskedR2); encrypted2F.AddRange(encrypted2);
+            //st = string.Join(" ", encrypted2F.Select(x => x.ToString()));
 
 
 
@@ -160,17 +169,25 @@ namespace HashFunction
             {
                 symbolLen = SYMBOLS_FOR_LEN2;
             }
+
             
             //1-й раунд розшифровки
             int count2 = Convert.ToInt32(String.Concat(encrypted2F.Take(symbolLen)));
             List<int> random2 = Preparation.FormUnmaskedRandomList(encrypted2F.Skip(symbolLen).Take(count2).ToList());
+            //var st = string.Join(" ", random2.Select(x => x.ToString()));
             encrypted2 = encrypted2F.Skip(symbolLen + random2.Count).ToList();
+            //st = string.Join(" ", encrypted2.Select(x => x.ToString()));
             decrypted2 = Code.HillPlusRandomDecrypt(encrypted2, SInverseMatrix, Alphabet.Length, random2);
+            //st = string.Join(" ", decrypted2.Select(x => x.ToString()));
             //2-й раунд розшифровки
             int count = Convert.ToInt32(String.Concat(decrypted2.Take(symbolLen)));
             List<int> random = Preparation.FormUnmaskedRandomList(decrypted2.Skip(symbolLen).Take(count).ToList());
+            //st = string.Join(" ", random.Select(x => x.ToString()));
             encrypted = decrypted2.Skip(symbolLen + random.Count).ToList();
+            string gfdsf = Preparation.FormStringFromDigit(decrypted2).ToString();
+            //st = string.Join(" ", encrypted.Select(x => x.ToString()));
             decrypted = Code.HillPlusRandomDecrypt(encrypted, InverseMatrix, Alphabet.Length, random);
+            //st = string.Join(" ", decrypted.Select(x => x.ToString()));
             if (me == null)
             {
                 decrypted = decrypted.Take(32).ToList();
