@@ -81,6 +81,7 @@ namespace HashFunction
                 arr.RemoveRange(0, order - 1);
                 id = (int)temp.Last();
             }
+            var str = string.Join(" ",output.Select(x=>x.ToString()));
             return output;
         }
         private static List<int> Miyaguchi_Preneel(List<int> H_prev,List<int> H_curr,List<int> m)
