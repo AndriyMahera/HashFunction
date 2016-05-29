@@ -19,8 +19,8 @@ namespace HashFunction
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             startForm = new Autorization();
-            Application.Run(new Form1());
-            //Application.Run(startForm);
+            //Application.Run(new Form1());
+            Application.Run(startForm);
         }
     }
 }
